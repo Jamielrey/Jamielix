@@ -1,0 +1,14 @@
+{
+  "name": "stremio-addon",
+  "version": "1.0.0",
+  "description": "Il tuo addon Stremio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Il tuo nome",
+  "license": "ISC",
+  "dependencies": {
+    "stremio-addon-sdk": "^1.6.10"
+  }
+}
