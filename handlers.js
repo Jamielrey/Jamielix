@@ -125,7 +125,7 @@ builder.defineCatalogHandler(async ({ type, id, extra, attore }) => {
 				const genreLinks = genres.map(genre => ({
 					name: genre,
 					category: 'genres',
-					url: `stremio:///discover/http%3A%2F%2Fjamielix.onrender.com%3A3000%2Fmanifest.json/Jamielix/movieCatalog?Genere=${genre}`
+					url: `stremio:///discover/https%3A%2F%2Fjamielix.onrender.com%2Fmanifest.json/Jamielix/movieCatalog?Genere=${genre}`
 					//url: `stremio:///search?search=${genre}`
 				}));
 
