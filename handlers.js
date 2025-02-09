@@ -34,10 +34,8 @@ const productionMap = {
 
 // Funzione per effettuare la richiesta HTTPS
 function fetch(url) {
-   console.log('Fetching URL:', url);
    return new Promise((resolve, reject) => {
        https.get(url, res => {
-           console.log('Response status:', res.statusCode);
            let data = '';
            res.on('data', chunk => { data += chunk; });
            res.on('end', () => {
@@ -69,8 +67,6 @@ const builder = new addonBuilder(manifest);
 
 builder.defineCatalogHandler(async ({ type, id, extra, attore }) => {
    try {
-       console.log("Catalog handler chiamato per type:", type, "id:", id, "extra:", extra);
-
        if (type === "Jamielix") {  
             let url = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=it`;
             
@@ -100,7 +96,6 @@ builder.defineCatalogHandler(async ({ type, id, extra, attore }) => {
             const page = extra?.skip ? Math.floor(extra.skip / 20) + 1 : 1;
             url += `&page=${page}`;
 
-            console.log("URL finale:", url);
             const response = await fetch(url);
             const results = response.results || [];
 
@@ -171,7 +166,6 @@ builder.defineCatalogHandler(async ({ type, id, extra, attore }) => {
 
             }));
 
-            console.log(`Preparati ${metas.length} meta`);
             return Promise.resolve({ metas });
        }
        
@@ -184,9 +178,7 @@ builder.defineCatalogHandler(async ({ type, id, extra, attore }) => {
 
 
 builder.defineMetaHandler(async ({ type, id }) => {
-    try {
-        console.log("Meta handler chiamato per type:", type, "id:", id);
-        
+    try {        
         const [prefix, tmdbId] = id.split(':');
         if (prefix !== "Jamielix") {
             return Promise.resolve({ meta: {} });
@@ -239,8 +231,6 @@ builder.defineMetaHandler(async ({ type, id }) => {
             cast: cast,  
             released: releasedDate  
         };
-
-        console.log("Meta object restituito:", meta);
         
         return Promise.resolve({ meta });
     } catch (err) {
